@@ -86,7 +86,7 @@ type GenericStats struct {
 	TotalRate             float32 `json:"total_rate"`
 	TotalRateIdeal        float32 `json:"total_rateideal"`
 	TotalFrequencyAvg     float32 `json:"total_freqavg"`
-	Frequency             float32 `json:"frequency,string"`
+	Frequency             Number  `json:"frequency"`
 	FrequencyAvg1         float32 `json:"freq_avg1"`
 	FrequencyAvg2         float32 `json:"freq_avg2"`
 	FrequencyAvg3         float32 `json:"freq_avg3"`
@@ -256,38 +256,38 @@ type GenericStats struct {
 	ChainRateIdeal14 float32 `json:"chain_rateideal14"`
 	ChainRateIdeal15 float32 `json:"chain_rateideal15"`
 	ChainRateIdeal16 float32 `json:"chain_rateideal16"`
-	ChainOpenCore1   int     `json:"chain_opencore_1,string"`
-	ChainOpenCore2   int     `json:"chain_opencore_2,string"`
-	ChainOpenCore3   int     `json:"chain_opencore_3,string"`
-	ChainOpenCore4   int     `json:"chain_opencore_4,string"`
-	ChainOpenCore5   int     `json:"chain_opencore_5,string"`
-	ChainOpenCore6   int     `json:"chain_opencore_6,string"`
-	ChainOpenCore7   int     `json:"chain_opencore_7,string"`
-	ChainOpenCore8   int     `json:"chain_opencore_8,string"`
-	ChainOpenCore9   int     `json:"chain_opencore_9,string"`
-	ChainOpenCore10  int     `json:"chain_opencore_10,string"`
-	ChainOpenCore11  int     `json:"chain_opencore_11,string"`
-	ChainOpenCore12  int     `json:"chain_opencore_12,string"`
-	ChainOpenCore13  int     `json:"chain_opencore_13,string"`
-	ChainOpenCore14  int     `json:"chain_opencore_14,string"`
-	ChainOpenCore15  int     `json:"chain_opencore_15,string"`
-	ChainOpenCore16  int     `json:"chain_opencore_16,string"`
-	ChainOffside1    int     `json:"chain_offside_1,string"`
-	ChainOffside2    int     `json:"chain_offside_2,string"`
-	ChainOffside3    int     `json:"chain_offside_3,string"`
-	ChainOffside4    int     `json:"chain_offside_4,string"`
-	ChainOffside5    int     `json:"chain_offside_5,string"`
-	ChainOffside6    int     `json:"chain_offside_6,string"`
-	ChainOffside7    int     `json:"chain_offside_7,string"`
-	ChainOffside8    int     `json:"chain_offside_8,string"`
-	ChainOffside9    int     `json:"chain_offside_9,string"`
-	ChainOffside10   int     `json:"chain_offside_10,string"`
-	ChainOffside11   int     `json:"chain_offside_11,string"`
-	ChainOffside12   int     `json:"chain_offside_12,string"`
-	ChainOffside13   int     `json:"chain_offside_13,string"`
-	ChainOffside14   int     `json:"chain_offside_14,string"`
-	ChainOffside15   int     `json:"chain_offside_15,string"`
-	ChainOffside16   int     `json:"chain_offside_16,string"`
+	ChainOpenCore1   Number  `json:"chain_opencore_1"`
+	ChainOpenCore2   Number  `json:"chain_opencore_2"`
+	ChainOpenCore3   Number  `json:"chain_opencore_3"`
+	ChainOpenCore4   Number  `json:"chain_opencore_4"`
+	ChainOpenCore5   Number  `json:"chain_opencore_5"`
+	ChainOpenCore6   Number  `json:"chain_opencore_6"`
+	ChainOpenCore7   Number  `json:"chain_opencore_7"`
+	ChainOpenCore8   Number  `json:"chain_opencore_8"`
+	ChainOpenCore9   Number  `json:"chain_opencore_9"`
+	ChainOpenCore10  Number  `json:"chain_opencore_10"`
+	ChainOpenCore11  Number  `json:"chain_opencore_11"`
+	ChainOpenCore12  Number  `json:"chain_opencore_12"`
+	ChainOpenCore13  Number  `json:"chain_opencore_13"`
+	ChainOpenCore14  Number  `json:"chain_opencore_14"`
+	ChainOpenCore15  Number  `json:"chain_opencore_15"`
+	ChainOpenCore16  Number  `json:"chain_opencore_16"`
+	ChainOffside1    Number  `json:"chain_offside_1"`
+	ChainOffside2    Number  `json:"chain_offside_2"`
+	ChainOffside3    Number  `json:"chain_offside_3"`
+	ChainOffside4    Number  `json:"chain_offside_4"`
+	ChainOffside5    Number  `json:"chain_offside_5"`
+	ChainOffside6    Number  `json:"chain_offside_6"`
+	ChainOffside7    Number  `json:"chain_offside_7"`
+	ChainOffside8    Number  `json:"chain_offside_8"`
+	ChainOffside9    Number  `json:"chain_offside_9"`
+	ChainOffside10   Number  `json:"chain_offside_10"`
+	ChainOffside11   Number  `json:"chain_offside_11"`
+	ChainOffside12   Number  `json:"chain_offside_12"`
+	ChainOffside13   Number  `json:"chain_offside_13"`
+	ChainOffside14   Number  `json:"chain_offside_14"`
+	ChainOffside15   Number  `json:"chain_offside_15"`
+	ChainOffside16   Number  `json:"chain_offside_16"`
 	ChainXtime1      string  `json:"chain_xtime1"`
 	ChainXtime2      string  `json:"chain_xtime2"`
 	ChainXtime3      string  `json:"chain_xtime3"`
@@ -308,8 +308,8 @@ type GenericStats struct {
 	Baud      int     `json:"baud"`
 	AsicCount int     `json:"asic_count"`
 	Timeout   int     `json:"timeout"`
-	Voltage   float32 `json:"voltage,string"`
-	USBPipe   int     `json:"USB Pipe,string"`
+	Voltage   Number  `json:"voltage"`
+	USBPipe   Number  `json:"USB Pipe"`
 	HWv1      int     `json:"hwv1"`
 	HWv2      int     `json:"hwv2"`
 	HWv3      int     `json:"hwv3"`
@@ -330,14 +330,14 @@ type StatsS7 struct {
 	Wait                  float64
 	Max                   float64
 	Min                   float64
-	Ghs5s                 float64 `json:"GHS 5s"`
+	Ghs5s                 Number  `json:"GHS 5s"`
 	GhsAverage            float64 `json:"GHS av"`
 	Baud                  int     `json:"baud"`
 	MinerCount            int16   `json:"miner_count"`
 	AsicCount             int     `json:"asic_count"`
 	Timeout               int     `json:"timeout"`
-	Frequency             float32 `json:"frequency,string"`
-	Voltage               float32 `json:"voltage,string"`
+	Frequency             Number  `json:"frequency"`
+	Voltage               float32 `json:"voltage"`
 	FanNum                int16   `json:"fan_num"`
 	Fan1                  int16   `json:"fan1"`
 	Fan3                  int16   `json:"fan3"`
@@ -349,7 +349,7 @@ type StatsS7 struct {
 	TempMax               int16   `json:"temp_max"`
 	DeviceHardwarePercent float64 `json:"Device Hardware%"`
 	NotMatchingWork       int     `json:"no_matching_work"`
-	USBPipe               int     `json:"USB Pipe,string"`
+	USBPipe               Number  `json:"USB Pipe"`
 	HWv1                  int     `json:"hwv1"`
 	HWv2                  int     `json:"hwv2"`
 	HWv3                  int     `json:"hwv3"`
@@ -375,10 +375,10 @@ type StatsT9 struct {
 	Wait                  float64
 	Max                   float64
 	Min                   float64
-	Ghs5s                 float64 `json:"GHS 5s,string"`
+	Ghs5s                 Number  `json:"GHS 5s"`
 	GhsAverage            float64 `json:"GHS av"`
 	MinerCount            int16   `json:"miner_count"`
-	Frequency             float32 `json:"frequency,string"`
+	Frequency             Number  `json:"frequency"`
 	FanNum                int16   `json:"fan_num"`
 	Fan3                  int16   `json:"fan3"`
 	Fan6                  int16   `json:"fan6"`
@@ -475,24 +475,24 @@ type StatsT9 struct {
 	ChainXtime12          string  `json:"chain_xtime12"`
 	ChainXtime13          string  `json:"chain_xtime13"`
 	ChainXtime14          string  `json:"chain_xtime14"`
-	ChainOffside2         int     `json:"chain_offside_2,string"`
-	ChainOffside3         int     `json:"chain_offside_3,string"`
-	ChainOffside4         int     `json:"chain_offside_4,string"`
-	ChainOffside9         int     `json:"chain_offside_9,string"`
-	ChainOffside10        int     `json:"chain_offside_10,string"`
-	ChainOffside11        int     `json:"chain_offside_11,string"`
-	ChainOffside12        int     `json:"chain_offside_12,string"`
-	ChainOffside13        int     `json:"chain_offside_13,string"`
-	ChainOffside14        int     `json:"chain_offside_14,string"`
-	ChainOpenCore2        int     `json:"chain_opencore_2,string"`
-	ChainOpenCore3        int     `json:"chain_opencore_3,string"`
-	ChainOpenCore4        int     `json:"chain_opencore_4,string"`
-	ChainOpenCore9        int     `json:"chain_opencore_9,string"`
-	ChainOpenCore10       int     `json:"chain_opencore_10,string"`
-	ChainOpenCore11       int     `json:"chain_opencore_11,string"`
-	ChainOpenCore12       int     `json:"chain_opencore_12,string"`
-	ChainOpenCore13       int     `json:"chain_opencore_13,string"`
-	ChainOpenCore14       int     `json:"chain_opencore_14,string"`
+	ChainOffside2         Number  `json:"chain_offside_2"`
+	ChainOffside3         Number  `json:"chain_offside_3"`
+	ChainOffside4         Number  `json:"chain_offside_4"`
+	ChainOffside9         Number  `json:"chain_offside_9"`
+	ChainOffside10        Number  `json:"chain_offside_10"`
+	ChainOffside11        Number  `json:"chain_offside_11"`
+	ChainOffside12        Number  `json:"chain_offside_12"`
+	ChainOffside13        Number  `json:"chain_offside_13"`
+	ChainOffside14        Number  `json:"chain_offside_14"`
+	ChainOpenCore2        Number  `json:"chain_opencore_2"`
+	ChainOpenCore3        Number  `json:"chain_opencore_3"`
+	ChainOpenCore4        Number  `json:"chain_opencore_4"`
+	ChainOpenCore9        Number  `json:"chain_opencore_9"`
+	ChainOpenCore10       Number  `json:"chain_opencore_10"`
+	ChainOpenCore11       Number  `json:"chain_opencore_11"`
+	ChainOpenCore12       Number  `json:"chain_opencore_12"`
+	ChainOpenCore13       Number  `json:"chain_opencore_13"`
+	ChainOpenCore14       Number  `json:"chain_opencore_14"`
 	MinerID               string  `json:"miner_id"`
 	MinerVersion          string  `json:"miner_version"`
 }
@@ -510,10 +510,10 @@ type StatsD3 struct {
 	Wait                  float64
 	Min                   float64
 	Max                   float64
-	Ghs5s                 float64 `json:"GHS 5s,string"`
+	Ghs5s                 Number  `json:"GHS 5s"`
 	GhsAverage            float64 `json:"GHS av"`
 	MinerCount            int16   `json:"miner_count"`
-	Frequency             float32 `json:"frequency,string"`
+	Frequency             Number  `json:"frequency"`
 	FanNum                int16   `json:"fan_num"`
 	Fan1                  int16   `json:"fan1"`
 	Fan2                  int16   `json:"fan2"`
@@ -558,7 +558,7 @@ type StatsL3 struct {
 	Max                   float64
 	ID                    string
 	Calls                 int
-	Frequency             float32 `json:"frequency,string"`
+	Frequency             Number  `json:"frequency"`
 	FanNum                int16   `json:"fan_num"`
 	Fan1                  int16   `json:"fan1"`
 	Fan2                  int16   `json:"fan2"`
@@ -580,7 +580,7 @@ type StatsL3 struct {
 	Temp4_2               int16   `json:"temp4_2"`
 	Temp4_3               int16   `json:"temp4_3"`
 	Temp4_4               int16   `json:"temp4_4"`
-	Ghs5s                 float64 `json:"GHS 5s,string"`
+	Ghs5s                 Number  `json:"GHS 5s"`
 	GhsAverage            float64 `json:"GHS av"`
 	ChainHW1              int     `json:"chain_hw1"`
 	ChainHW2              int     `json:"chain_hw2"`
@@ -623,7 +623,7 @@ type StatsS9 struct {
 	TotalRate             float32 `json:"total_rate"`
 	TotalRateIdeal        float32 `json:"total_rateideal"`
 	TotalFrequencyAvg     float32 `json:"total_freqavg"`
-	Frequency             float32 `json:"frequency,string"`
+	Frequency             Number  `json:"frequency"`
 	FrequencyAvg6         float32 `json:"freq_avg6"`
 	FrequencyAvg7         float32 `json:"freq_avg7"`
 	FrequencyAvg8         float32 `json:"freq_avg8"`
@@ -638,7 +638,7 @@ type StatsS9 struct {
 	Temp2_6               int16   `json:"temp2_6"`
 	Temp2_7               int16   `json:"temp2_7"`
 	Temp2_8               int16   `json:"temp2_8"`
-	Ghs5s                 float64 `json:"GHS 5s,string"`
+	Ghs5s                 Number  `json:"GHS 5s"`
 	GhsAverage            float64 `json:"GHS av"`
 	ChainHW6              int     `json:"chain_hw6"`
 	ChainHW7              int     `json:"chain_hw7"`
@@ -655,12 +655,12 @@ type StatsS9 struct {
 	ChainRateIdeal6       float32 `json:"chain_rateideal6"`
 	ChainRateIdeal7       float32 `json:"chain_rateideal7"`
 	ChainRateIdeal8       float32 `json:"chain_rateideal8"`
-	ChainOpenCore6        int     `json:"chain_opencore_6,string"`
-	ChainOpenCore7        int     `json:"chain_opencore_7,string"`
-	ChainOpenCore8        int     `json:"chain_opencore_8,string"`
-	ChainOffside6         int     `json:"chain_offside_6,string"`
-	ChainOffside7         int     `json:"chain_offside_7,string"`
-	ChainOffside8         int     `json:"chain_offside_8,string"`
+	ChainOpenCore6        Number  `json:"chain_opencore_6"`
+	ChainOpenCore7        Number  `json:"chain_opencore_7"`
+	ChainOpenCore8        Number  `json:"chain_opencore_8"`
+	ChainOffside6         Number  `json:"chain_offside_6"`
+	ChainOffside7         Number  `json:"chain_offside_7"`
+	ChainOffside8         Number  `json:"chain_offside_8"`
 	// ChainXtime6 need to be parsed?
 	ChainXtime6 string `json:"chain_xtime6"`
 	ChainXtime7 string `json:"chain_xtime7"`
@@ -687,7 +687,7 @@ type Summary struct {
 	MHS5s float64 `json:"MHS 5s"`
 	MHSav float64 `json:"MHS av"`
 	// s7 and later
-	GHS5s               float64 `json:"GHS 5s,string"`
+	GHS5s               Number  `json:"GHS 5s"`
 	GHSav               float64 `json:"GHS av"`
 	NetworkBlocks       int64   `json:"Network Blocks"`
 	PoolRejectedPercent float64 `json:"Pool Rejected%"`
