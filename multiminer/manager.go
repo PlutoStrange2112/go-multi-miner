@@ -8,9 +8,9 @@ import (
 
 // Device represents a tracked miner.
 type Device struct {
-	ID        MinerID
-	Endpoint  Endpoint
-	Driver    Driver
+	ID         MinerID
+	Endpoint   Endpoint
+	Driver     Driver
 	DriverName string
 }
 
@@ -27,7 +27,7 @@ func NewManager(reg *Registry) *Manager { return NewManagerWithOptions(reg, defa
 func NewManagerWithOptions(reg *Registry, opt ManagerOptions) *Manager {
 	pool := NewConnectionPool()
 	pool.SetLimits(5, 10, 5*time.Minute)
-	
+
 	return &Manager{
 		reg:  reg,
 		dev:  make(map[MinerID]*Device),
@@ -43,7 +43,9 @@ func (m *Manager) AddOrDetect(ctx context.Context, id MinerID, ep Endpoint, d Dr
 	if d == nil {
 		var err error
 		d, err = m.reg.Detect(ctx, ep)
-		if err != nil { return err }
+		if err != nil {
+			return err
+		}
 	}
 	name := d.Name()
 	m.dev[id] = &Device{ID: id, Endpoint: ep, Driver: d, DriverName: name}
@@ -51,9 +53,12 @@ func (m *Manager) AddOrDetect(ctx context.Context, id MinerID, ep Endpoint, d Dr
 }
 
 func (m *Manager) List() []Device {
-	m.mu.RLock(); defer m.mu.RUnlock()
+	m.mu.RLock()
+	defer m.mu.RUnlock()
 	out := make([]Device, 0, len(m.dev))
-	for _, d := range m.dev { out = append(out, *d) }
+	for _, d := range m.dev {
+		out = append(out, *d)
+	}
 	return out
 }
 
@@ -62,27 +67,31 @@ func (m *Manager) WithSession(ctx context.Context, id MinerID, fn func(Session) 
 	m.mu.RLock()
 	d := m.dev[id]
 	m.mu.RUnlock()
-	if d == nil { return ErrNotFound }
-	
+	if d == nil {
+		return ErrNotFound
+	}
+
 	sess, err := m.pool.GetSession(ctx, id, d)
-	if err != nil { return err }
-	
+	if err != nil {
+		return err
+	}
+
 	// Ensure session is returned to pool
 	defer m.pool.ReturnSession(id, sess)
-	
+
 	return fn(sess)
 }
 
-
 // DeviceInfo is a safe DTO for API responses.
 type DeviceInfo struct {
-	ID string `json:"id"`
+	ID      string `json:"id"`
 	Address string `json:"address"`
-	Driver string `json:"driver"`
+	Driver  string `json:"driver"`
 }
 
 func (m *Manager) DeviceInfos() []DeviceInfo {
-	m.mu.RLock(); defer m.mu.RUnlock()
+	m.mu.RLock()
+	defer m.mu.RUnlock()
 	out := make([]DeviceInfo, 0, len(m.dev))
 	for _, d := range m.dev {
 		out = append(out, DeviceInfo{ID: string(d.ID), Address: d.Endpoint.Address, Driver: d.DriverName})

@@ -12,7 +12,7 @@ import (
 // Driver stub for Braiins OS (often cgminer-compatible with extensions).
 type braiinsDriver struct{}
 
-func NewBraiinsDriver() Driver { return &braiinsDriver{} }
+func NewBraiinsDriver() Driver        { return &braiinsDriver{} }
 func (d *braiinsDriver) Name() string { return "braiins" }
 func (d *braiinsDriver) Capabilities() Capability {
 	return Capability{ReadStats: true, ReadSummary: true, ListPools: true, ManagePools: true, Restart: true, Quit: true, PowerControl: true, FanControl: true,
@@ -26,20 +26,20 @@ func (d *braiinsDriver) Detect(ctx context.Context, ep Endpoint) (bool, error) {
 		Transport: cg.NewJSONTransport(),
 		Dialer:    &net.Dialer{Timeout: 1200 * time.Millisecond},
 	}
-	
+
 	v, err := c.VersionContext(ctx)
 	if err != nil {
 		return false, nil
 	}
-	
+
 	// Check for Braiins-specific identifiers in version info
 	joined := strings.ToLower(v.Type + " " + v.Miner + " " + v.BMMiner + " " + v.CompileTime)
-	if strings.Contains(joined, "braiins") || 
-	   strings.Contains(joined, "braiinsos") ||
-	   strings.Contains(joined, "bos") {
+	if strings.Contains(joined, "braiins") ||
+		strings.Contains(joined, "braiinsos") ||
+		strings.Contains(joined, "bos") {
 		return true, nil
 	}
-	
+
 	return false, nil
 }
 

@@ -11,17 +11,17 @@ import (
 // NOTE: This is optional for library consumers. You can use the Manager
 // directly without HTTP endpoints if you're integrating into an existing application.
 type Server struct {
-	mgr             *Manager
+	mgr              *Manager
 	addressValidator *AddressValidator
 	commandValidator *CommandValidator
 }
 
-func NewServer(mgr *Manager) *Server { 
+func NewServer(mgr *Manager) *Server {
 	return &Server{
 		mgr:              mgr,
 		addressValidator: NewAddressValidator(),
 		commandValidator: NewCommandValidator(),
-	} 
+	}
 }
 
 func (s *Server) routes(mux *http.ServeMux) {
@@ -50,7 +50,7 @@ func (s *Server) handleDevices(w http.ResponseWriter, r *http.Request) {
 			writeMultiMinerError(w, NewInvalidInputError("id and address are required"))
 			return
 		}
-		
+
 		// Validate address for security
 		if err := s.addressValidator.ValidateAddress(req.Address); err != nil {
 			writeMultiMinerError(w, err.(*MultiMinerError))
@@ -125,13 +125,13 @@ func (s *Server) handleDevice(w http.ResponseWriter, r *http.Request) {
 			writeMultiMinerError(w, NewInvalidInputError("invalid json"))
 			return
 		}
-		
+
 		// Validate command for security
 		if err := s.commandValidator.ValidateCommand(req.Command); err != nil {
 			writeMultiMinerError(w, err.(*MultiMinerError))
 			return
 		}
-		
+
 		if err := s.commandValidator.ValidateParameter(req.Command, req.Parameter); err != nil {
 			writeMultiMinerError(w, err.(*MultiMinerError))
 			return
@@ -236,8 +236,12 @@ func (s *Server) Start(ctx context.Context, addr string) error {
 	mux := http.NewServeMux()
 	s.routes(mux)
 	// Health endpoints
-	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) { writeJSON(w, http.StatusOK, map[string]string{"status": "ok"}) })
-	mux.HandleFunc("/api/v1/healthz", func(w http.ResponseWriter, r *http.Request) { writeJSON(w, http.StatusOK, map[string]string{"status": "ok"}) })
+	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	})
+	mux.HandleFunc("/api/v1/healthz", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	})
 	srv := &http.Server{Addr: addr, Handler: mux}
 	go func() {
 		<-ctx.Done()

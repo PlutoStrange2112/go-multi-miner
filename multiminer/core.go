@@ -21,15 +21,15 @@ type Endpoint struct {
 
 // Capability declares supported features of a driver/device.
 type Capability struct {
-	ReadStats     bool
-	ReadSummary   bool
-	ListPools     bool
-	ManagePools   bool // add/enable/disable/remove/switch
-	Restart       bool
-	Quit          bool
-	Commands      []string // optional list of supported raw commands
-	FanControl    bool
-	PowerControl  bool
+	ReadStats           bool
+	ReadSummary         bool
+	ListPools           bool
+	ManagePools         bool // add/enable/disable/remove/switch
+	Restart             bool
+	Quit                bool
+	Commands            []string // optional list of supported raw commands
+	FanControl          bool
+	PowerControl        bool
 	SupportedPowerModes []PowerModeKind
 }
 
@@ -72,9 +72,9 @@ const (
 
 type PowerMode struct {
 	Kind      PowerModeKind
-	Watts     int   // optional target watts
-	VoltageMv int   // optional millivolts
-	FreqMHz   int   // optional MHz per chain
+	Watts     int // optional target watts
+	VoltageMv int // optional millivolts
+	FreqMHz   int // optional MHz per chain
 }
 
 type FanModeKind string

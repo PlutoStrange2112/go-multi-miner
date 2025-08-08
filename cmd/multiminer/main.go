@@ -56,7 +56,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
-	multiminer.LogInfo(ctx, "Starting multi-miner server", 
+	multiminer.LogInfo(ctx, "Starting multi-miner server",
 		multiminer.F("version", "1.0.0"),
 		multiminer.F("listen_address", config.Server.ListenAddress),
 		multiminer.F("log_level", config.Logging.Level))
@@ -85,7 +85,7 @@ func main() {
 	// Start background cleanup if enabled
 	if config.Manager.AutoCleanup {
 		mgr.StartCleanup(ctx, config.Manager.CleanupInterval)
-		multiminer.LogInfo(ctx, "Started background cleanup", 
+		multiminer.LogInfo(ctx, "Started background cleanup",
 			multiminer.F("interval", config.Manager.CleanupInterval))
 	}
 
@@ -102,20 +102,20 @@ func main() {
 		multiminer.LogInfo(ctx, "Loading initial devices from environment")
 		for _, item := range strings.Split(env, ",") {
 			parts := strings.SplitN(item, "=", 2)
-			if len(parts) != 2 { 
-				continue 
+			if len(parts) != 2 {
+				continue
 			}
 			id := multiminer.MinerID(parts[0])
 			endpoint := multiminer.Endpoint{Address: parts[1]}
-			
+
 			if err := mgr.AddOrDetect(ctx, id, endpoint, nil); err != nil {
-				multiminer.LogWarn(ctx, "Failed to add device from environment", 
-					multiminer.F("id", string(id)), 
-					multiminer.F("address", parts[1]), 
+				multiminer.LogWarn(ctx, "Failed to add device from environment",
+					multiminer.F("id", string(id)),
+					multiminer.F("address", parts[1]),
 					multiminer.F("error", err))
 			} else {
-				multiminer.LogInfo(ctx, "Added device from environment", 
-					multiminer.F("id", string(id)), 
+				multiminer.LogInfo(ctx, "Added device from environment",
+					multiminer.F("id", string(id)),
 					multiminer.F("address", parts[1]))
 			}
 		}
@@ -123,7 +123,7 @@ func main() {
 
 	// Create and configure HTTP server
 	srv := multiminer.NewServer(mgr)
-	
+
 	httpServer := &http.Server{
 		Addr:         config.Server.ListenAddress,
 		ReadTimeout:  config.Server.ReadTimeout,
@@ -142,16 +142,16 @@ func main() {
 
 	// Wait for shutdown signal
 	<-ctx.Done()
-	
+
 	multiminer.LogInfo(ctx, "Shutdown signal received, gracefully shutting down...")
-	
+
 	// Graceful shutdown with timeout
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-	
+
 	if err := httpServer.Shutdown(shutdownCtx); err != nil {
 		multiminer.LogError(ctx, "Server shutdown error", multiminer.F("error", err))
 	}
-	
+
 	multiminer.LogInfo(ctx, "Server stopped")
 }

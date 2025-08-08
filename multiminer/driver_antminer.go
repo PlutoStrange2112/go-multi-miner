@@ -22,10 +22,10 @@ func (d *antminerDriver) Capabilities() Capability { return d.base.Capabilities(
 func (d *antminerDriver) Detect(ctx context.Context, ep Endpoint) (bool, error) {
 	// Query version via cgminer to confirm vendor/model.
 	c := &cg.CGMiner{
-		Address:  ep.Address,
-		Timeout:  1200 * time.Millisecond,
+		Address:   ep.Address,
+		Timeout:   1200 * time.Millisecond,
 		Transport: cg.NewJSONTransport(),
-		Dialer:   &net.Dialer{Timeout: 1200 * time.Millisecond},
+		Dialer:    &net.Dialer{Timeout: 1200 * time.Millisecond},
 	}
 	v, err := c.VersionContext(ctx)
 	if err != nil {
@@ -42,7 +42,9 @@ func (d *antminerDriver) Detect(ctx context.Context, ep Endpoint) (bool, error) 
 func (d *antminerDriver) Open(ctx context.Context, ep Endpoint) (Session, error) {
 	// Wrap the base session to override Model reporting
 	bs, err := d.base.Open(ctx, ep)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	return &antminerSession{Session: bs}, nil
 }
 

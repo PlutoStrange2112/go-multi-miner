@@ -37,7 +37,12 @@ func (r *Registry) Detect(ctx context.Context, ep Endpoint) (Driver, error) {
 
 // Get returns a driver by its Name().
 func (r *Registry) Get(name string) Driver {
-	r.mu.RLock(); defer r.mu.RUnlock()
-	for _, d := range r.drivers { if d.Name() == name { return d } }
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	for _, d := range r.drivers {
+		if d.Name() == name {
+			return d
+		}
+	}
 	return nil
 }

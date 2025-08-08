@@ -81,7 +81,7 @@ func (l *SimpleLogger) WithFields(fields ...Field) Logger {
 	newFields := make([]Field, 0, len(l.fields)+len(fields))
 	newFields = append(newFields, l.fields...)
 	newFields = append(newFields, fields...)
-	
+
 	return &SimpleLogger{
 		level:  l.level,
 		logger: l.logger,
@@ -93,7 +93,7 @@ func (l *SimpleLogger) log(level, msg string, fields ...Field) {
 	allFields := make([]Field, 0, len(l.fields)+len(fields))
 	allFields = append(allFields, l.fields...)
 	allFields = append(allFields, fields...)
-	
+
 	logMsg := level + " " + msg
 	if len(allFields) > 0 {
 		logMsg += " |"
@@ -101,7 +101,7 @@ func (l *SimpleLogger) log(level, msg string, fields ...Field) {
 			logMsg += " " + field.Key + "=" + formatValue(field.Value)
 		}
 	}
-	
+
 	l.logger.Output(3, logMsg)
 }
 

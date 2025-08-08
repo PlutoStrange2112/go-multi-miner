@@ -10,12 +10,12 @@ import (
 
 // Config holds all configuration for the multiminer system
 type Config struct {
-	Server      ServerConfig      `json:"server"`
-	Manager     ManagerConfig     `json:"manager"`
-	Pool        PoolConfig        `json:"pool"`
-	Logging     LoggingConfig     `json:"logging"`
-	Security    SecurityConfig    `json:"security"`
-	Validation  ValidationConfig  `json:"validation"`
+	Server     ServerConfig     `json:"server"`
+	Manager    ManagerConfig    `json:"manager"`
+	Pool       PoolConfig       `json:"pool"`
+	Logging    LoggingConfig    `json:"logging"`
+	Security   SecurityConfig   `json:"security"`
+	Validation ValidationConfig `json:"validation"`
 }
 
 // ServerConfig configures the HTTP server
@@ -115,7 +115,7 @@ func DefaultConfig() *Config {
 // LoadConfig loads configuration from a JSON file
 func LoadConfig(filename string) (*Config, error) {
 	config := DefaultConfig()
-	
+
 	data, err := os.ReadFile(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -124,11 +124,11 @@ func LoadConfig(filename string) (*Config, error) {
 		}
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
-	
+
 	if err := json.Unmarshal(data, config); err != nil {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
 	}
-	
+
 	return config, nil
 }
 
@@ -138,34 +138,34 @@ func LoadConfigWithEnv(filename string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Override with environment variables if present
 	if addr := os.Getenv("MULTIMINER_LISTEN_ADDRESS"); addr != "" {
 		config.Server.ListenAddress = addr
 	}
-	
+
 	if level := os.Getenv("MULTIMINER_LOG_LEVEL"); level != "" {
 		config.Logging.Level = level
 	}
-	
+
 	if timeoutStr := os.Getenv("MULTIMINER_PROBE_TIMEOUT"); timeoutStr != "" {
 		if timeout, err := time.ParseDuration(timeoutStr); err == nil {
 			config.Manager.ProbeTimeout = timeout
 		}
 	}
-	
+
 	if maxIdleStr := os.Getenv("MULTIMINER_MAX_IDLE_CONNECTIONS"); maxIdleStr != "" {
 		if maxIdle, err := strconv.Atoi(maxIdleStr); err == nil {
 			config.Pool.MaxIdleConnections = maxIdle
 		}
 	}
-	
+
 	if maxOpenStr := os.Getenv("MULTIMINER_MAX_OPEN_CONNECTIONS"); maxOpenStr != "" {
 		if maxOpen, err := strconv.Atoi(maxOpenStr); err == nil {
 			config.Pool.MaxOpenConnections = maxOpen
 		}
 	}
-	
+
 	return config, nil
 }
 
@@ -175,11 +175,11 @@ func (c *Config) SaveConfig(filename string) error {
 	if err != nil {
 		return fmt.Errorf("failed to marshal config: %w", err)
 	}
-	
+
 	if err := os.WriteFile(filename, data, 0644); err != nil {
 		return fmt.Errorf("failed to write config file: %w", err)
 	}
-	
+
 	return nil
 }
 

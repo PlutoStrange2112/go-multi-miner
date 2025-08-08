@@ -305,16 +305,16 @@ type GenericStats struct {
 	ChainXtime15     string  `json:"chain_xtime15"`
 	ChainXtime16     string  `json:"chain_xtime16"`
 	// s7
-	Baud      int     `json:"baud"`
-	AsicCount int     `json:"asic_count"`
-	Timeout   int     `json:"timeout"`
-	Voltage   Number  `json:"voltage"`
-	USBPipe   Number  `json:"USB Pipe"`
-	HWv1      int     `json:"hwv1"`
-	HWv2      int     `json:"hwv2"`
-	HWv3      int     `json:"hwv3"`
-	HWv4      int     `json:"hwv4"`
-	TempAvg   int16   `json:"temp_avg"`
+	Baud      int    `json:"baud"`
+	AsicCount int    `json:"asic_count"`
+	Timeout   int    `json:"timeout"`
+	Voltage   Number `json:"voltage"`
+	USBPipe   Number `json:"USB Pipe"`
+	HWv1      int    `json:"hwv1"`
+	HWv2      int    `json:"hwv2"`
+	HWv3      int    `json:"hwv3"`
+	HWv4      int    `json:"hwv4"`
+	TempAvg   int16  `json:"temp_avg"`
 }
 
 // StatsS7 - generic antminer stats struct

@@ -71,7 +71,7 @@ func (p *ConnectionPool) ReturnSession(id MinerID, sess Session) {
 	p.mu.RLock()
 	pool, exists := p.pools[id]
 	p.mu.RUnlock()
-	
+
 	if exists {
 		pool.returnSession(sess)
 	} else {
@@ -98,7 +98,7 @@ func (p *ConnectionPool) CleanUp() {
 func (p *ConnectionPool) Close() {
 	p.mu.Lock()
 	defer p.mu.Unlock()
-	
+
 	for _, pool := range p.pools {
 		pool.closeAll()
 	}
@@ -207,8 +207,8 @@ func (p *ConnectionPool) Stats() map[MinerID]PoolStats {
 		stats[id] = PoolStats{
 			ActiveConnections: len(pool.active),
 			IdleConnections:   len(pool.idle),
-			MaxOpen:          pool.maxOpen,
-			MaxIdle:          pool.maxIdle,
+			MaxOpen:           pool.maxOpen,
+			MaxIdle:           pool.maxIdle,
 		}
 		pool.mu.Unlock()
 	}
@@ -219,6 +219,6 @@ func (p *ConnectionPool) Stats() map[MinerID]PoolStats {
 type PoolStats struct {
 	ActiveConnections int `json:"active_connections"`
 	IdleConnections   int `json:"idle_connections"`
-	MaxOpen          int `json:"max_open"`
-	MaxIdle          int `json:"max_idle"`
+	MaxOpen           int `json:"max_open"`
+	MaxIdle           int `json:"max_idle"`
 }
