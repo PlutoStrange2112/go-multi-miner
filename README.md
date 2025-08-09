@@ -1,8 +1,8 @@
-# Go Multi-Miner API
+# Go Multi-Miner API WIP
 
 [![MIT Licence](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/mit-license)
 
-A comprehensive, production-ready Go library for managing mixed cryptocurrency mining fleets. This enhanced fork extends the original [go-cgminer-api](https://github.com/x1unix/go-cgminer-api) by [x1unix](https://github.com/x1unix) with critical bug fixes, modern mining hardware support, and enterprise-grade features.
+A WIP Go library for managing mixed cryptocurrency mining fleets. This enhanced fork extends the original [go-cgminer-api](https://github.com/x1unix/go-cgminer-api) by [x1unix](https://github.com/x1unix) with critical bug fixes, modern mining hardware support, and enterprise-grade features.
 
 ## 🙏 Credits
 
